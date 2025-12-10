@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaspreet Singh - OXR Resume</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. OXR STYLE RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; color: #1a1a1a; }
+
+        /* Hide scrollbars */
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. TOP BAR --- */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 1000;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(248, 249, 250, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- 3. CONTAINER --- */
+        .container {
+            width: 100%;
+            padding: 20px;
+            padding-top: 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- 4. RESUME CARD --- */
+        .resume {
+            width: 100%;
+            max-width: 1100px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* --- 5. BLUE BLUR --- */
+        .blue-blur {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+            top: 200px;
+            left: -120px;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- 6. 3-COLUMN LAYOUT --- */
+        .grid-layout {
+            display: grid;
+            /* Left (180px) | Middle (Auto) | Right (150px) */
+            grid-template-columns: 180px 1fr 150px;
+            gap: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- 7. TYPOGRAPHY --- */
+        
+        /* UPDATED: Bigger & Bolder Headers */
+        .section-header {
+            font-size: 12px;       /* Increased size */
+            font-weight: 800;      /* Extra Bold */
+            text-transform: uppercase;
+            border-bottom: 2px solid #000; /* Thicker line */
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            color: #000 !important; /* Pure Black */
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.5px;
+        }
+        .first-header { margin-top: 0; }
+
+        h1 {
+            font-size: 38px;
+            line-height: 1.1;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            color: #000;
+        }
+
+        .role-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* CONTACTS (Now under name) */
+        .contact-row {
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 100px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #333;
+        }
+        .contact-row a {
+            text-decoration: none;
+            color: #111;
+            font-weight: 600;
+        }
+
+        .black-line {
+            width: 100%;
+            height: 2px;
+            background: #000;
+            margin-bottom: 5px;
+        }
+
+        /* About Me Text */
+        .about-me {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        /* Experience */
+        h3 { font-size: 16px; margin: 0 0 4px 0; font-weight: 700; }
+        .date { font-size: 11px; font-weight: 600; color: #666; margin-bottom: 10px; display: block; text-transform: uppercase; }
+
+        ul { padding-left: 16px; margin: 0 0 30px 0; }
+        li { font-size: 13px; line-height: 1.6; margin-bottom: 6px; color: #222; }
+
+        /* Sidebar Items */
+        .list-item {
+            border-bottom: 1px solid #f5f5f5;
+            padding: 6px 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .edu-item { margin-bottom: 20px; }
+        .edu-degree { font-size: 12px; font-weight: 700; display: block; }
+        .edu-school { font-size: 11px; color: #666; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .container { padding: 10px; padding-top: 70px; }
+            .resume { padding: 30px; width: 100%; }
+            .grid-layout { display: flex; flex-direction: column; }
+            .middle-col { order: -1; } 
+            .blue-blur { width: 250px; height: 250px; }
+            h1 { font-size: 32px; }
+            .contact-row { flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="timezone">DELHI / INDIA</div>
+        <div class="live-time" id="time">Loading...</div>
+    </div>
+
+    <div class="container">
+        <div class="resume">
+            
+            <div class="blue-blur"></div>
+
+            <div class="grid-layout">
+                
+                <div class="left-col">
+                    
+                    <div class="section-header first-header"><span>HARD SKILLS</span></div>
+                    <div class="list-item">SAP ERP</div>
+                    <div class="list-item">Salesforce (SFDC)</div>
+                    <div class="list-item">Google Sheets</div>
+                    <div class="list-item">CPQ Tools</div>
+                    <div class="list-item">MS Excel</div>
+                    <div class="list-item">Invoice Dispute</div>
+                    <div class="list-item">Salesforce.com</div>
+
+                    <div class="section-header"><span>SOFT SKILLS</span></div>
+                    <div class="list-item">Communication</div>
+                    <div class="list-item">Loss Prevention</div>
+                    <div class="list-item">Time Management</div>
+                    <div class="list-item">Teamwork</div>
+                    <div class="list-item">Customer Satisfaction</div>
+
+                    <div class="section-header"><span>EDUCATION</span></div>
+                    <div class="edu-item">
+                        <span class="edu-degree">Bachelor of Arts</span>
+                        <span class="edu-school">Delhi University (2019-22)</span>
+                    </div>
+                    <div class="edu-item">
+                        <span class="edu-degree">Intermediate</span>
+                        <span class="edu-school">Guru Nanak Public School (2018-19)</span>
+                    </div>
+                </div>
+
+                <div class="middle-col">
+                    
+                    <h1>Jaspreet Singh</h1>
+                    <div class="role-title">Order Management Analyst</div>
+
+                    <div class="contact-row">
+                        <a href="mailto:jaspreet20048@gmail.com">jaspreet20048@gmail.com</a>
+                     
+                        <a href="tel:+917011258245">+91 70112 58245</a>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="black-line"></div>
+
+                    <div class="section-header first-header" style="margin-top: 0; margin-bottom: 15px;"><span>ABOUT ME</span></div>
+                    <p class="about-me">
+                        Detail-oriented and performance-driven O2C professional with hands-on experience in invoice processing, payment tracking, cash application, and customer query management. Skilled in SAP, reporting, and end-to-end process coordination, ensuring smooth revenue cycles and high customer satisfaction. Known for accuracy, time management, and problem-solving, with a passion for improving process efficiency and driving operational excellence.
+                    </p>
+
+                    <div class="section-header"><span>EXPERIENCE</span></div>
+
+                    <div>
+                        <h3>HCLTech at Google</h3>
+                        <span class="date">APR 2024 - NOV 2025</span>
+                        <ul>
+                            <li>Managed contracts, orders, and invoicing for Google, ensuring accuracy and compliance.</li>
+                            <li>Coordinated with sales teams, partners, and stakeholders for deal closure.</li>
+                            <li>Utilized SAP and Salesforce for order processing, billing, and customer management.</li>
+                            <li>Oversaw order-to-cash cycle, credit checks, and revenue recognition.</li>
+                            <li>Collaborated with global teams (NAMER, LATAM, EMEA, APAC).</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Achievements</h3>
+                        <ul>
+                            <li>Top performer of the month for 6 consecutive months and Promoted to Escalation Desk to resolve complex cases.</li>
+                            <li>Worked on root-cause analysis (RCA) for recurring disputes, reducing issue repetition by 10–20%.</li>
+                            <li>Consistently recognized by leadership for quality, productivity, and client communication skills.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right-col">
+                    <div class="section-header first-header"><span>LANGUAGES</span></div>
+                    <div class="list-item">English (Proficient)</div>
+                    <div class="list-item">Hindi (Native)</div>
+                    <div class="list-item">Punjabi (Native)</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const time = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            document.getElementById('time').textContent = time + " IST";
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>
